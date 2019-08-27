@@ -11,11 +11,12 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <meta http-equiv="x-ua-compatible" content="ie=edge">
 
     <title>AdminLTE 3 | Starter</title>
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <link rel="stylesheet" href="/css/app.css">
 </head>
 <body class="hold-transition sidebar-mini">
-<div class="wrapper">
+<div class="wrapper" id="app">
 
     <!-- Navbar -->
     <nav class="main-header navbar navbar-expand navbar-white navbar-light">
@@ -63,17 +64,17 @@ scratch. This page gets rid of all links and provides the needed markup only.
                     <!-- Add icons to the links using the .nav-icon class
                          with font-awesome or any other icon font library -->
                     <li class="nav-item">
-                        <a href="#" class="nav-link">
-                            <i class="nav-icon fas fa-tachometer-alt"></i>
+                        <router-link to="/bang-dieu-khien" class="nav-link">
+                            <i class="nav-icon fas fa-tachometer-alt blue"></i>
                             <p>
                                 bảng điều khiển
                             </p>
-                        </a>
+                        </router-link>
                     </li>
 
                     <li class="nav-item has-treeview ">
-                        <a href="#" class="nav-link active">
-                            <i class="nav-icon fa fa-cog"></i>
+                        <a href="#" class="nav-link">
+                            <i class="nav-icon fa fa-cog green"></i>
                             <p>
                                 quản lý
                                 <i class="right fas fa-angle-left"></i>
@@ -81,14 +82,14 @@ scratch. This page gets rid of all links and provides the needed markup only.
                         </a>
                         <ul class="nav nav-treeview">
                             <li class="nav-item">
-                                <a href="#" class="nav-link active">
-                                    <i class="far fa-circle nav-icon"></i>
-                                    <p>Active Page</p>
-                                </a>
+                                <router-link to="/Users" class="nav-link">
+                                    <i class="fas fa-users nav-icon"></i>
+                                    <p>người dùng</p>
+                                </router-link>
                             </li>
                             <li class="nav-item">
                                 <a href="#" class="nav-link">
-                                    <i class="far fa-circle nav-icon"></i>
+                                    <i class="far fa-circle-o nav-icon"></i>
                                     <p>Inactive Page</p>
                                 </a>
                             </li>
@@ -96,21 +97,27 @@ scratch. This page gets rid of all links and provides the needed markup only.
                     </li>
 
                     <li class="nav-item">
-                        <a href="#" class="nav-link">
-                            <i class="nav-icon fas fa-user"></i>
+                        <router-link to="/ho-so" class="nav-link">
+                            <i class="nav-icon fas fa-user orange"></i>
                             <p>
                                 Hồ sơ
                             </p>
-                        </a>
+                        </router-link>
                     </li>
 
                     <li class="nav-item">
-                        <a href="#" class="nav-link">
-                            <i class="nav-icon fa fa-power-off"></i>
+                        <a class="nav-link" href="{{ route('logout') }}"
+                           onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                            <i class="nav-icon fa fa-power-off red"></i>
                             <p>
-                                đăng xuất
+                                {{ __('đăng xuất') }}
                             </p>
                         </a>
+
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                            @csrf
+                        </form>
                     </li>
                 </ul>
             </nav>
@@ -125,7 +132,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
         <!-- Main content -->
         <div class="content">
             <div class="container-fluid">
-
+                <router-view></router-view>
             </div><!-- /.container-fluid -->
         </div>
         <!-- /.content -->
