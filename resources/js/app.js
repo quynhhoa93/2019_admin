@@ -7,6 +7,7 @@
 require('./bootstrap');
 
 window.Vue = require('vue');
+import moment from 'moment';
 import { Form, HasError, AlertError } from 'vform';
 
 window.Form = Form;
@@ -29,6 +30,9 @@ const router = new VueRouter({
     routes,
 })
 
+Vue.filter('myDate',function (created) {
+    return moment(created).lang("vi").format('LL');
+});
 
 /**
  * The following block of code may be used to automatically register your
