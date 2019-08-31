@@ -46,13 +46,14 @@
             <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="addNewLabel">Thêm người dùng mới</h5>
+                        <h5 class="modal-title" v-show="!editmode" id="addNewLabel">Thêm người dùng mới</h5>
+                        <h5 class="modal-title" v-show="editmode" id="addNewLabel">cập nhật thông tin người dùng</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
 
-                    <form @submit.prevent="createUser">
+                    <form @submit.prevent="editmode ? updateUser() : createUser()">
                     <div class="modal-body">
                         <div class="form-group">
                             <input v-model="form.name" type="text" name="name"
@@ -94,7 +95,8 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-primary">Create</button>
+                        <button v-show="!editmode" type="submit" class="btn btn-primary">Create</button>
+                        <button v-show="editmode" type="submit" class="btn btn-success">update</button>
                     </div>
                     </form>
                 </div>
@@ -108,8 +110,10 @@
         name: "Users",
         data(){
             return{
+                editmode:false,
                 users:{},
                 form: new Form({
+                    id:'',
                     name:'',
                     email:'',
                     password:'',
@@ -120,11 +124,30 @@
             }
         },
         methods:{
+            updateUser(id){
+                this.$Progress.start();
+                this.form.put('api/user/'+this.form.id)
+                    .then(()=>{
+                        $('#addNew').modal('hide');
+                        swal.fire(
+                            'update!',
+                            'thông tin đã được cập nhật.',
+                            'success'
+                        )
+                        this.$Progress.finish();
+                        Fire.$emit('AfterCreated');
+                    })
+                    .catch(()=>{
+                        this.$Progress.fail();
+                    });
+            },
             newModal(){
+                this.editmode = false;
                 this.form.reset();
                 $('#addNew').modal('show');
             },
             editModal(user){
+                this.editmode=true;
                 this.form.reset();
                 $('#addNew').modal('show');
                 this.form.fill(user);
