@@ -40,6 +40,7 @@ Vue.use(VueRouter)
 
 let routes =[
     { path: '/bang-dieu-khien', component: require('./components/Dashboard.vue').default },
+    { path: '/developer', component: require('./components/Developer.vue').default },
     { path: '/ho-so', component: require('./components/Profile.vue').default },
     { path: '/Users', component: require('./components/Users.vue').default }
 ]
@@ -52,6 +53,22 @@ const router = new VueRouter({
 Vue.filter('myDate',function (created) {
     return moment(created).locale("vi").format('LL');
 });
+
+
+Vue.component(
+    'passport-clients',
+    require('./components/passport/Clients.vue').default
+);
+
+Vue.component(
+    'passport-authorized-clients',
+    require('./components/passport/AuthorizedClients.vue').default
+);
+
+Vue.component(
+    'passport-personal-access-tokens',
+    require('./components/passport/PersonalAccessTokens.vue').default
+);
 
 
 window.Fire = new Vue();
