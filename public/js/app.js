@@ -1957,181 +1957,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -2149,12 +1974,51 @@ __webpack_require__.r(__webpack_exports__);
   mounted: function mounted() {
     console.log('Component mounted.');
   },
+  methods: {
+    updateInfo: function updateInfo() {
+      var _this = this;
+
+      this.$Progress.start();
+
+      if (this.form.password === "") {
+        this.form.password = undefined;
+      }
+
+      this.form.put('api/profile').then(function () {
+        _this.$Progress.finish();
+      })["catch"](function () {
+        _this.$Progress.fail();
+      });
+    },
+    updateProfile: function updateProfile(e) {
+      var _this2 = this;
+
+      var file = e.target.files[0];
+      console.log(file);
+      var reader = new FileReader();
+
+      if (file['size'] < 2111775) {
+        reader.onloadend = function (file) {
+          // console.log('RESULT', reader.result)
+          _this2.form.photo = reader.result;
+        };
+
+        reader.readAsDataURL(file);
+      } else {
+        swal.fire({
+          type: 'error',
+          title: 'Rất tiếc...',
+          text: 'Bạn đã tải lên một tệp tin quá lớn'
+        });
+      }
+    }
+  },
   created: function created() {
-    var _this = this;
+    var _this3 = this;
 
     axios.get("api/profile").then(function (_ref) {
       var data = _ref.data;
-      return _this.form.fill(data);
+      return _this3.form.fill(data);
     });
   }
 });
@@ -60923,11 +60787,12 @@ var render = function() {
               _c("div", { staticClass: "tab-content" }, [
                 _vm._m(2),
                 _vm._v(" "),
-                _vm._m(3),
-                _vm._v(" "),
                 _c(
                   "div",
-                  { staticClass: "tab-pane", attrs: { id: "settings" } },
+                  {
+                    staticClass: "tab-pane active show",
+                    attrs: { id: "settings" }
+                  },
                   [
                     _c("form", { staticClass: "form-horizontal" }, [
                       _c("div", { staticClass: "form-group" }, [
@@ -60940,33 +60805,49 @@ var render = function() {
                           [_vm._v("Name")]
                         ),
                         _vm._v(" "),
-                        _c("div", { staticClass: "col-sm-10" }, [
-                          _c("input", {
-                            directives: [
-                              {
-                                name: "model",
-                                rawName: "v-model",
-                                value: _vm.form.name,
-                                expression: "form.name"
-                              }
-                            ],
-                            staticClass: "form-control",
-                            attrs: {
-                              type: "email",
-                              id: "inputName",
-                              placeholder: "Name"
-                            },
-                            domProps: { value: _vm.form.name },
-                            on: {
-                              input: function($event) {
-                                if ($event.target.composing) {
-                                  return
+                        _c(
+                          "div",
+                          { staticClass: "col-sm-10" },
+                          [
+                            _c("input", {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.form.name,
+                                  expression: "form.name"
                                 }
-                                _vm.$set(_vm.form, "name", $event.target.value)
+                              ],
+                              staticClass: "form-control",
+                              class: {
+                                "is-invalid": _vm.form.errors.has("name")
+                              },
+                              attrs: {
+                                type: "text",
+                                id: "inputName",
+                                placeholder: "Name"
+                              },
+                              domProps: { value: _vm.form.name },
+                              on: {
+                                input: function($event) {
+                                  if ($event.target.composing) {
+                                    return
+                                  }
+                                  _vm.$set(
+                                    _vm.form,
+                                    "name",
+                                    $event.target.value
+                                  )
+                                }
                               }
-                            }
-                          })
-                        ])
+                            }),
+                            _vm._v(" "),
+                            _c("has-error", {
+                              attrs: { form: _vm.form, field: "name" }
+                            })
+                          ],
+                          1
+                        )
                       ]),
                       _vm._v(" "),
                       _c("div", { staticClass: "form-group" }, [
@@ -60979,42 +60860,145 @@ var render = function() {
                           [_vm._v("Email")]
                         ),
                         _vm._v(" "),
-                        _c("div", { staticClass: "col-sm-10" }, [
-                          _c("input", {
-                            directives: [
-                              {
-                                name: "model",
-                                rawName: "v-model",
-                                value: _vm.form.email,
-                                expression: "form.email"
-                              }
-                            ],
-                            staticClass: "form-control",
-                            attrs: {
-                              type: "email",
-                              id: "inputEmail",
-                              placeholder: "Email"
-                            },
-                            domProps: { value: _vm.form.email },
-                            on: {
-                              input: function($event) {
-                                if ($event.target.composing) {
-                                  return
+                        _c(
+                          "div",
+                          { staticClass: "col-sm-10" },
+                          [
+                            _c("input", {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.form.email,
+                                  expression: "form.email"
                                 }
-                                _vm.$set(_vm.form, "email", $event.target.value)
+                              ],
+                              staticClass: "form-control",
+                              class: {
+                                "is-invalid": _vm.form.errors.has("email")
+                              },
+                              attrs: {
+                                type: "email",
+                                id: "inputEmail",
+                                placeholder: "Email"
+                              },
+                              domProps: { value: _vm.form.email },
+                              on: {
+                                input: function($event) {
+                                  if ($event.target.composing) {
+                                    return
+                                  }
+                                  _vm.$set(
+                                    _vm.form,
+                                    "email",
+                                    $event.target.value
+                                  )
+                                }
                               }
-                            }
+                            }),
+                            _vm._v(" "),
+                            _c("has-error", {
+                              attrs: { form: _vm.form, field: "email" }
+                            })
+                          ],
+                          1
+                        )
+                      ]),
+                      _vm._v(" "),
+                      _vm._m(3),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "form-group" }, [
+                        _c("label", { staticClass: "col-sm-2 control-label" }, [
+                          _vm._v("Ảnh đại diện")
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "col-sm-12" }, [
+                          _c("input", {
+                            staticClass: "form-input",
+                            attrs: { type: "file", name: "photo" },
+                            on: { change: _vm.updateProfile }
                           })
                         ])
                       ]),
                       _vm._v(" "),
-                      _vm._m(4),
+                      _c("div", { staticClass: "form-group" }, [
+                        _c(
+                          "label",
+                          {
+                            staticClass: "col-sm-12 control-label",
+                            attrs: { for: "password" }
+                          },
+                          [_vm._v("Mật khẩu (để trống nếu không thay đổi)")]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "div",
+                          { staticClass: "col-sm-12" },
+                          [
+                            _c("input", {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.form.password,
+                                  expression: "form.password"
+                                }
+                              ],
+                              staticClass: "form-control",
+                              class: {
+                                "is-invalid": _vm.form.errors.has("password")
+                              },
+                              attrs: {
+                                type: "password",
+                                id: "password",
+                                placeholder: "Mật khẩu ",
+                                autocomplete: "new-password"
+                              },
+                              domProps: { value: _vm.form.password },
+                              on: {
+                                input: function($event) {
+                                  if ($event.target.composing) {
+                                    return
+                                  }
+                                  _vm.$set(
+                                    _vm.form,
+                                    "password",
+                                    $event.target.value
+                                  )
+                                }
+                              }
+                            }),
+                            _vm._v(" "),
+                            _c("has-error", {
+                              attrs: { form: _vm.form, field: "password" }
+                            })
+                          ],
+                          1
+                        )
+                      ]),
                       _vm._v(" "),
-                      _vm._m(5),
-                      _vm._v(" "),
-                      _vm._m(6),
-                      _vm._v(" "),
-                      _vm._m(7)
+                      _c("div", { staticClass: "form-group" }, [
+                        _c(
+                          "div",
+                          { staticClass: "col-sm-offset-2 col-sm-10" },
+                          [
+                            _c(
+                              "button",
+                              {
+                                staticClass: "btn btn-success",
+                                attrs: { type: "submit" },
+                                on: {
+                                  click: function($event) {
+                                    $event.preventDefault()
+                                    return _vm.updateInfo($event)
+                                  }
+                                }
+                              },
+                              [_vm._v("Submit")]
+                            )
+                          ]
+                        )
+                      ])
                     ])
                   ]
                 )
@@ -61128,316 +61112,10 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "tab-pane", attrs: { id: "activity" } }, [
-      _c("div", { staticClass: "post" }, [
-        _c("div", { staticClass: "user-block" }, [
-          _c("img", {
-            staticClass: "img-circle img-bordered-sm",
-            attrs: { src: "", alt: "user image" }
-          }),
-          _vm._v(" "),
-          _c("span", { staticClass: "username" }, [
-            _c("a", { attrs: { href: "#" } }, [_vm._v("Jonathan Burke Jr.")]),
-            _vm._v(" "),
-            _c(
-              "a",
-              { staticClass: "float-right btn-tool", attrs: { href: "#" } },
-              [_c("i", { staticClass: "fas fa-times" })]
-            )
-          ]),
-          _vm._v(" "),
-          _c("span", { staticClass: "description" }, [
-            _vm._v("Shared publicly - 7:30 PM today")
-          ])
-        ]),
-        _vm._v(" "),
-        _c("p", [
-          _vm._v(
-            "\n                                        Lorem ipsum represents a long-held tradition for designers,\n                                        typographers and the like. Some people hate it and argue for\n                                        its demise, but others ignore the hate as they create awesome\n                                        tools to help create filler text for everyone from bacon lovers\n                                        to Charlie Sheen fans.\n                                    "
-          )
-        ]),
-        _vm._v(" "),
-        _c("p", [
-          _c(
-            "a",
-            { staticClass: "link-black text-sm mr-2", attrs: { href: "#" } },
-            [_c("i", { staticClass: "fas fa-share mr-1" }), _vm._v(" Share")]
-          ),
-          _vm._v(" "),
-          _c("a", { staticClass: "link-black text-sm", attrs: { href: "#" } }, [
-            _c("i", { staticClass: "far fa-thumbs-up mr-1" }),
-            _vm._v("\n                                            Like")
-          ]),
-          _vm._v(" "),
-          _c("span", { staticClass: "float-right" }, [
-            _c(
-              "a",
-              { staticClass: "link-black text-sm", attrs: { href: "#" } },
-              [
-                _c("i", { staticClass: "far fa-comments mr-1" }),
-                _vm._v(" Comments (5)\n                      ")
-              ]
-            )
-          ])
-        ]),
-        _vm._v(" "),
-        _c("input", {
-          staticClass: "form-control form-control-sm",
-          attrs: { type: "text", placeholder: "Type a comment" }
-        })
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "post" }, [
-        _c("div", { staticClass: "user-block" }, [
-          _c("img", {
-            staticClass: "img-circle img-bordered-sm",
-            attrs: { src: "", alt: "User Image" }
-          }),
-          _vm._v(" "),
-          _c("span", { staticClass: "username" }, [
-            _c("a", { attrs: { href: "#" } }, [_vm._v("Adam Jones")]),
-            _vm._v(" "),
-            _c(
-              "a",
-              { staticClass: "float-right btn-tool", attrs: { href: "#" } },
-              [_c("i", { staticClass: "fas fa-times" })]
-            )
-          ]),
-          _vm._v(" "),
-          _c("span", { staticClass: "description" }, [
-            _vm._v("Posted 5 photos - 5 days ago")
-          ])
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "row mb-3" }, [
-          _c("div", { staticClass: "col-sm-6" }, [
-            _c("img", {
-              staticClass: "img-fluid",
-              attrs: { src: "", alt: "Photo" }
-            })
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "col-sm-6" }, [
-            _c("div", { staticClass: "row" }, [
-              _c("div", { staticClass: "col-sm-6" }, [
-                _c("img", {
-                  staticClass: "img-fluid mb-3",
-                  attrs: { src: "", alt: "Photo" }
-                }),
-                _vm._v(" "),
-                _c("img", {
-                  staticClass: "img-fluid",
-                  attrs: { src: "", alt: "Photo" }
-                })
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "col-sm-6" }, [
-                _c("img", {
-                  staticClass: "img-fluid mb-3",
-                  attrs: { src: "", alt: "Photo" }
-                }),
-                _vm._v(" "),
-                _c("img", {
-                  staticClass: "img-fluid",
-                  attrs: { src: "", alt: "Photo" }
-                })
-              ])
-            ])
-          ])
-        ]),
-        _vm._v(" "),
-        _c("p", [
-          _c(
-            "a",
-            { staticClass: "link-black text-sm mr-2", attrs: { href: "#" } },
-            [_c("i", { staticClass: "fas fa-share mr-1" }), _vm._v(" Share")]
-          ),
-          _vm._v(" "),
-          _c("a", { staticClass: "link-black text-sm", attrs: { href: "#" } }, [
-            _c("i", { staticClass: "far fa-thumbs-up mr-1" }),
-            _vm._v("\n                                            Like")
-          ]),
-          _vm._v(" "),
-          _c("span", { staticClass: "float-right" }, [
-            _c(
-              "a",
-              { staticClass: "link-black text-sm", attrs: { href: "#" } },
-              [
-                _c("i", { staticClass: "far fa-comments mr-1" }),
-                _vm._v(" Comments (5)\n                      ")
-              ]
-            )
-          ])
-        ]),
-        _vm._v(" "),
-        _c("input", {
-          staticClass: "form-control form-control-sm",
-          attrs: { type: "text", placeholder: "Type a comment" }
-        })
+      _c("h3", { staticClass: "text-center" }, [
+        _vm._v("Display User Activity")
       ])
     ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "div",
-      { staticClass: "tab-pane active", attrs: { id: "timeline" } },
-      [
-        _c("div", { staticClass: "timeline timeline-inverse" }, [
-          _c("div", { staticClass: "time-label" }, [
-            _c("span", { staticClass: "bg-danger" }, [
-              _vm._v(
-                "\n                      10 Feb. 2014\n                    "
-              )
-            ])
-          ]),
-          _vm._v(" "),
-          _c("div", [
-            _c("i", { staticClass: "fas fa-envelope bg-primary" }),
-            _vm._v(" "),
-            _c("div", { staticClass: "timeline-item" }, [
-              _c("span", { staticClass: "time" }, [
-                _c("i", { staticClass: "far fa-clock" }),
-                _vm._v(" 12:05")
-              ]),
-              _vm._v(" "),
-              _c("h3", { staticClass: "timeline-header" }, [
-                _c("a", { attrs: { href: "#" } }, [_vm._v("Support Team")]),
-                _vm._v(
-                  " sent you an\n                                                email"
-                )
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "timeline-body" }, [
-                _vm._v(
-                  "\n                                                Etsy doostang zoodles disqus groupon greplin oooj voxy zoodles,\n                                                weebly ning heekya handango imeem plugg dopplr jibjab, movity\n                                                jajah plickers sifteo edmodo ifttt zimbra. Babblely odeo kaboodle\n                                                quora plaxo ideeli hulu weebly balihoo...\n                                            "
-                )
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "timeline-footer" }, [
-                _c(
-                  "a",
-                  {
-                    staticClass: "btn btn-primary btn-sm",
-                    attrs: { href: "#" }
-                  },
-                  [_vm._v("Read more")]
-                ),
-                _vm._v(" "),
-                _c(
-                  "a",
-                  {
-                    staticClass: "btn btn-danger btn-sm",
-                    attrs: { href: "#" }
-                  },
-                  [_vm._v("Delete")]
-                )
-              ])
-            ])
-          ]),
-          _vm._v(" "),
-          _c("div", [
-            _c("i", { staticClass: "fas fa-user bg-info" }),
-            _vm._v(" "),
-            _c("div", { staticClass: "timeline-item" }, [
-              _c("span", { staticClass: "time" }, [
-                _c("i", { staticClass: "far fa-clock" }),
-                _vm._v(" 5 mins ago")
-              ]),
-              _vm._v(" "),
-              _c("h3", { staticClass: "timeline-header border-0" }, [
-                _c("a", { attrs: { href: "#" } }, [_vm._v("Sarah Young")]),
-                _vm._v(
-                  "\n                                                accepted your friend request\n                                            "
-                )
-              ])
-            ])
-          ]),
-          _vm._v(" "),
-          _c("div", [
-            _c("i", { staticClass: "fas fa-comments bg-warning" }),
-            _vm._v(" "),
-            _c("div", { staticClass: "timeline-item" }, [
-              _c("span", { staticClass: "time" }, [
-                _c("i", { staticClass: "far fa-clock" }),
-                _vm._v(" 27 mins ago")
-              ]),
-              _vm._v(" "),
-              _c("h3", { staticClass: "timeline-header" }, [
-                _c("a", { attrs: { href: "#" } }, [_vm._v("Jay White")]),
-                _vm._v(
-                  " commented on your\n                                                post"
-                )
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "timeline-body" }, [
-                _vm._v(
-                  "\n                                                Take me to your leader!\n                                                Switzerland is small and neutral!\n                                                We are more like Germany, ambitious and misunderstood!\n                                            "
-                )
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "timeline-footer" }, [
-                _c(
-                  "a",
-                  {
-                    staticClass: "btn btn-warning btn-flat btn-sm",
-                    attrs: { href: "#" }
-                  },
-                  [_vm._v("View comment")]
-                )
-              ])
-            ])
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "time-label" }, [
-            _c("span", { staticClass: "bg-success" }, [
-              _vm._v(
-                "\n                      3 Jan. 2014\n                    "
-              )
-            ])
-          ]),
-          _vm._v(" "),
-          _c("div", [
-            _c("i", { staticClass: "fas fa-camera bg-purple" }),
-            _vm._v(" "),
-            _c("div", { staticClass: "timeline-item" }, [
-              _c("span", { staticClass: "time" }, [
-                _c("i", { staticClass: "far fa-clock" }),
-                _vm._v(" 2 days ago")
-              ]),
-              _vm._v(" "),
-              _c("h3", { staticClass: "timeline-header" }, [
-                _c("a", { attrs: { href: "#" } }, [_vm._v("Mina Lee")]),
-                _vm._v(
-                  " uploaded new photos\n                                            "
-                )
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "timeline-body" }, [
-                _c("img", {
-                  attrs: { src: "http://placehold.it/150x100", alt: "..." }
-                }),
-                _vm._v(" "),
-                _c("img", {
-                  attrs: { src: "http://placehold.it/150x100", alt: "..." }
-                }),
-                _vm._v(" "),
-                _c("img", {
-                  attrs: { src: "http://placehold.it/150x100", alt: "..." }
-                }),
-                _vm._v(" "),
-                _c("img", {
-                  attrs: { src: "http://placehold.it/150x100", alt: "..." }
-                })
-              ])
-            ])
-          ]),
-          _vm._v(" "),
-          _c("div", [_c("i", { staticClass: "far fa-clock bg-gray" })])
-        ])
-      ]
-    )
   },
   function() {
     var _vm = this
@@ -61458,56 +61136,6 @@ var staticRenderFns = [
           staticClass: "form-control",
           attrs: { id: "inputExperience", placeholder: "Experience" }
         })
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "form-group" }, [
-      _c("label", { staticClass: "col-sm-2 control-label" }, [
-        _vm._v("Ảnh đại diện")
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "col-sm-12" }, [
-        _c("input", {
-          staticClass: "form-input",
-          attrs: { type: "file", name: "photo" }
-        })
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "form-group" }, [
-      _c(
-        "label",
-        { staticClass: "col-sm-12 control-label", attrs: { for: "password" } },
-        [_vm._v("Mật khẩu (để trống nếu không thay đổi)")]
-      ),
-      _vm._v(" "),
-      _c("div", { staticClass: "col-sm-12" }, [
-        _c("input", {
-          staticClass: "form-control",
-          attrs: { type: "password", id: "password", placeholder: "Passport" }
-        })
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "form-group" }, [
-      _c("div", { staticClass: "col-sm-offset-2 col-sm-10" }, [
-        _c(
-          "button",
-          { staticClass: "btn btn-success", attrs: { type: "submit" } },
-          [_vm._v("Submit")]
-        )
       ])
     ])
   }

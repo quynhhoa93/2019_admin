@@ -64,206 +64,26 @@
                                 </li>
                             </ul>
                         </div><!-- /.card-header -->
+
+
+
                         <div class="card-body">
                             <div class="tab-content">
+                                <!-- Activity Tab -->
                                 <div class="tab-pane" id="activity">
-                                    <!-- Post -->
-                                    <div class="post">
-                                        <div class="user-block">
-                                            <img class="img-circle img-bordered-sm" src="" alt="user image">
-                                            <span class="username">
-                          <a href="#">Jonathan Burke Jr.</a>
-                          <a href="#" class="float-right btn-tool"><i class="fas fa-times"></i></a>
-                        </span>
-                                            <span class="description">Shared publicly - 7:30 PM today</span>
-                                        </div>
-                                        <!-- /.user-block -->
-                                        <p>
-                                            Lorem ipsum represents a long-held tradition for designers,
-                                            typographers and the like. Some people hate it and argue for
-                                            its demise, but others ignore the hate as they create awesome
-                                            tools to help create filler text for everyone from bacon lovers
-                                            to Charlie Sheen fans.
-                                        </p>
-
-                                        <p>
-                                            <a href="#" class="link-black text-sm mr-2"><i
-                                                    class="fas fa-share mr-1"></i> Share</a>
-                                            <a href="#" class="link-black text-sm"><i class="far fa-thumbs-up mr-1"></i>
-                                                Like</a>
-                                            <span class="float-right">
-                          <a href="#" class="link-black text-sm">
-                            <i class="far fa-comments mr-1"></i> Comments (5)
-                          </a>
-                        </span>
-                                        </p>
-
-                                        <input class="form-control form-control-sm" type="text"
-                                               placeholder="Type a comment">
-                                    </div>
-                                    <!-- /.post -->
-
-                                    <!-- Post -->
-                                    <div class="post">
-                                        <div class="user-block">
-                                            <img class="img-circle img-bordered-sm" src="" alt="User Image">
-                                            <span class="username">
-                          <a href="#">Adam Jones</a>
-                          <a href="#" class="float-right btn-tool"><i class="fas fa-times"></i></a>
-                        </span>
-                                            <span class="description">Posted 5 photos - 5 days ago</span>
-                                        </div>
-                                        <!-- /.user-block -->
-                                        <div class="row mb-3">
-                                            <div class="col-sm-6">
-                                                <img class="img-fluid" src="" alt="Photo">
-                                            </div>
-                                            <!-- /.col -->
-                                            <div class="col-sm-6">
-                                                <div class="row">
-                                                    <div class="col-sm-6">
-                                                        <img class="img-fluid mb-3" src="" alt="Photo">
-                                                        <img class="img-fluid" src="" alt="Photo">
-                                                    </div>
-                                                    <!-- /.col -->
-                                                    <div class="col-sm-6">
-                                                        <img class="img-fluid mb-3" src="" alt="Photo">
-                                                        <img class="img-fluid" src="" alt="Photo">
-                                                    </div>
-                                                    <!-- /.col -->
-                                                </div>
-                                                <!-- /.row -->
-                                            </div>
-                                            <!-- /.col -->
-                                        </div>
-                                        <!-- /.row -->
-
-                                        <p>
-                                            <a href="#" class="link-black text-sm mr-2"><i
-                                                    class="fas fa-share mr-1"></i> Share</a>
-                                            <a href="#" class="link-black text-sm"><i class="far fa-thumbs-up mr-1"></i>
-                                                Like</a>
-                                            <span class="float-right">
-                          <a href="#" class="link-black text-sm">
-                            <i class="far fa-comments mr-1"></i> Comments (5)
-                          </a>
-                        </span>
-                                        </p>
-
-                                        <input class="form-control form-control-sm" type="text"
-                                               placeholder="Type a comment">
-                                    </div>
-                                    <!-- /.post -->
+                                    <h3 class="text-center">Display User Activity</h3>
                                 </div>
-                                <!-- /.tab-pane -->
-                                <div class="tab-pane active" id="timeline">
-                                    <!-- The timeline -->
-                                    <div class="timeline timeline-inverse">
-                                        <!-- timeline time label -->
-                                        <div class="time-label">
-                        <span class="bg-danger">
-                          10 Feb. 2014
-                        </span>
-                                        </div>
-                                        <!-- /.timeline-label -->
-                                        <!-- timeline item -->
-                                        <div>
-                                            <i class="fas fa-envelope bg-primary"></i>
 
-                                            <div class="timeline-item">
-                                                <span class="time"><i class="far fa-clock"></i> 12:05</span>
 
-                                                <h3 class="timeline-header"><a href="#">Support Team</a> sent you an
-                                                    email</h3>
-
-                                                <div class="timeline-body">
-                                                    Etsy doostang zoodles disqus groupon greplin oooj voxy zoodles,
-                                                    weebly ning heekya handango imeem plugg dopplr jibjab, movity
-                                                    jajah plickers sifteo edmodo ifttt zimbra. Babblely odeo kaboodle
-                                                    quora plaxo ideeli hulu weebly balihoo...
-                                                </div>
-                                                <div class="timeline-footer">
-                                                    <a href="#" class="btn btn-primary btn-sm">Read more</a>
-                                                    <a href="#" class="btn btn-danger btn-sm">Delete</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <!-- END timeline item -->
-                                        <!-- timeline item -->
-                                        <div>
-                                            <i class="fas fa-user bg-info"></i>
-
-                                            <div class="timeline-item">
-                                                <span class="time"><i class="far fa-clock"></i> 5 mins ago</span>
-
-                                                <h3 class="timeline-header border-0"><a href="#">Sarah Young</a>
-                                                    accepted your friend request
-                                                </h3>
-                                            </div>
-                                        </div>
-                                        <!-- END timeline item -->
-                                        <!-- timeline item -->
-                                        <div>
-                                            <i class="fas fa-comments bg-warning"></i>
-
-                                            <div class="timeline-item">
-                                                <span class="time"><i class="far fa-clock"></i> 27 mins ago</span>
-
-                                                <h3 class="timeline-header"><a href="#">Jay White</a> commented on your
-                                                    post</h3>
-
-                                                <div class="timeline-body">
-                                                    Take me to your leader!
-                                                    Switzerland is small and neutral!
-                                                    We are more like Germany, ambitious and misunderstood!
-                                                </div>
-                                                <div class="timeline-footer">
-                                                    <a href="#" class="btn btn-warning btn-flat btn-sm">View comment</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <!-- END timeline item -->
-                                        <!-- timeline time label -->
-                                        <div class="time-label">
-                        <span class="bg-success">
-                          3 Jan. 2014
-                        </span>
-                                        </div>
-                                        <!-- /.timeline-label -->
-                                        <!-- timeline item -->
-                                        <div>
-                                            <i class="fas fa-camera bg-purple"></i>
-
-                                            <div class="timeline-item">
-                                                <span class="time"><i class="far fa-clock"></i> 2 days ago</span>
-
-                                                <h3 class="timeline-header"><a href="#">Mina Lee</a> uploaded new photos
-                                                </h3>
-
-                                                <div class="timeline-body">
-                                                    <img src="http://placehold.it/150x100" alt="...">
-                                                    <img src="http://placehold.it/150x100" alt="...">
-                                                    <img src="http://placehold.it/150x100" alt="...">
-                                                    <img src="http://placehold.it/150x100" alt="...">
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <!-- END timeline item -->
-                                        <div>
-                                            <i class="far fa-clock bg-gray"></i>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- /.tab-pane -->
-
-                                <div class="tab-pane" id="settings">
+                                <div class="tab-pane active show" id="settings">
                                     <form class="form-horizontal">
                                         <div class="form-group">
                                             <label for="inputName" class="col-sm-2 control-label">Name</label>
 
                                             <div class="col-sm-10">
-                                                <input type="email" v-model="form.name" class="form-control" id="inputName"
-                                                       placeholder="Name">
+                                                <input type="text" v-model="form.name" class="form-control" id="inputName"
+                                                       placeholder="Name" :class="{ 'is-invalid': form.errors.has('name') }">
+                                                <has-error :form="form" field="name"></has-error>
                                             </div>
                                         </div>
 
@@ -272,7 +92,8 @@
 
                                             <div class="col-sm-10">
                                                 <input type="email" v-model="form.email" class="form-control" id="inputEmail"
-                                                       placeholder="Email">
+                                                       placeholder="Email" :class="{ 'is-invalid': form.errors.has('email') }">
+                                                <has-error :form="form" field="email"></has-error>
                                             </div>
                                         </div>
 
@@ -289,7 +110,7 @@
                                         <div class="form-group">
                                             <label class="col-sm-2 control-label">Ảnh đại diện</label>
                                             <div class="col-sm-12">
-                                                <input type="file" name="photo" class="form-input">
+                                                <input type="file" @change="updateProfile" name="photo" class="form-input">
                                             </div>
                                         </div>
 
@@ -298,16 +119,20 @@
 
                                             <div class="col-sm-12">
                                                 <input type="password"
+                                                       v-model="form.password"
                                                        class="form-control"
                                                        id="password"
-                                                       placeholder="Passport"
+                                                       placeholder="Mật khẩu "
+                                                       autocomplete = "new-password"
+                                                       :class="{ 'is-invalid': form.errors.has('password') }"
                                                 >
+                                                <has-error :form="form" field="password"></has-error>
                                             </div>
                                         </div>
 
                                         <div class="form-group">
                                             <div class="col-sm-offset-2 col-sm-10">
-                                                <button type="submit" class="btn btn-success">Submit</button>
+                                                <button type="submit" @click.prevent="updateInfo" class="btn btn-success">Submit</button>
                                             </div>
                                         </div>
                                     </form>
@@ -340,6 +165,40 @@
         },
         mounted() {
             console.log('Component mounted.')
+        },
+
+        methods:{
+            updateInfo(){
+                this.$Progress.start();
+                if(this.form.password === ""){
+                    this.form.password = undefined;
+                }
+                this.form.put('api/profile')
+                    .then(()=>{
+                        this.$Progress.finish();
+                    })
+                    .catch(()=>{
+                        this.$Progress.fail();
+                    });
+            },
+            updateProfile(e){
+                let file = e.target.files[0];
+                console.log(file);
+                let reader = new FileReader();
+                if(file['size']<2111775) {
+                    reader.onloadend = (file) => {
+                        // console.log('RESULT', reader.result)
+                        this.form.photo = reader.result;
+                    }
+                    reader.readAsDataURL(file);
+                }else {
+                    swal.fire({
+                        type: 'error',
+                        title: 'Rất tiếc...',
+                        text: 'Bạn đã tải lên một tệp tin quá lớn',
+                    })
+                }
+            }
         },
         created(){
             axios.get("api/profile")

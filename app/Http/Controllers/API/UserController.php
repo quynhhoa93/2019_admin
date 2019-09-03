@@ -6,6 +6,8 @@ use App\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
+use Intervention\Image\ImageManagerStatic as Image;
+
 
 class UserController extends Controller
 {
@@ -49,6 +51,28 @@ class UserController extends Controller
         ]);
     }
 
+
+    public function updateProfile(Request $request){
+        $user = auth('api')->user();
+        $this->validate($request,[
+            'name'=>'required|string|max:100',
+            'email'=>'required|string|email|max:200|unique:users,email,'.$user->id,
+            'password'=>'sometimes|required|min:6',
+        ]);
+        $currentPhoto = $user->photo;
+        if($request->photo != $currentPhoto){
+            $name = time().'.' . explode('/', explode(':', substr($request->photo, 0, strpos($request->photo, ';')))[1])[1];
+            \Image::make($request->photo)->save(public_path('img/profile/').$name);
+            $request->merge(['photo'=>$name]);
+        }
+        if(!empty($request->password)){
+            $request->merge(['password' => Hash::make($request['password'])]);
+        }
+        $user->update($request->all());
+
+
+        return ['message'=>'thanh cong'];
+    }
 
     public function profile(){
         return auth('api')->user();
