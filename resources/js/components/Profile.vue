@@ -2,7 +2,7 @@
     .widget-user-header {
         background-position: center center;
         background-size: cover;
-        height: 300px;
+        height: 300px !important;
     }
     .widget-user .card-footer{
         padding: 0;
@@ -21,7 +21,7 @@
                         <h5 class="widget-user-desc text-left">Web Designer</h5>
                     </div>
                     <div class="widget-user-image">
-                        <img class="img-circle" src="" alt="User Avatar">
+                        <img class="img-circle" :src="getProfilePhoto()" alt="User Avatar">
                     </div>
                     <div class="card-footer">
                         <div class="row">
@@ -168,6 +168,10 @@
         },
 
         methods:{
+            getProfilePhoto(){
+                let prefix = (this.form.photo.match(/\//) ? '' : '/img/profile/');
+                return prefix + this.form.photo;
+            },
             updateInfo(){
                 this.$Progress.start();
                 if(this.form.password === ""){
