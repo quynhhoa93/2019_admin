@@ -1989,6 +1989,8 @@ __webpack_require__.r(__webpack_exports__);
       }
 
       this.form.put('api/profile').then(function () {
+        Fire.$emit('AfterCreated');
+
         _this.$Progress.finish();
       })["catch"](function () {
         _this.$Progress.fail();
