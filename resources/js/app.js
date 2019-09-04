@@ -44,7 +44,8 @@ let routes =[
     { path: '/bang-dieu-khien', component: require('./components/Dashboard.vue').default },
     { path: '/developer', component: require('./components/Developer.vue').default },
     { path: '/ho-so', component: require('./components/Profile.vue').default },
-    { path: '/Users', component: require('./components/Users.vue').default }
+    { path: '/Users', component: require('./components/Users.vue').default },
+    { path: '/*', component: require('./components/NotFound.vue').default }
 ]
 
 const router = new VueRouter({
@@ -102,5 +103,13 @@ Vue.component('pagination', require('laravel-vue-pagination'));
 
 const app = new Vue({
     el: '#app',
-    router
+    router,
+    data:{
+        search:''
+    },
+    methods:{
+        searchit(){
+            Fire.$emit('searching');
+        }
+    }
 });
